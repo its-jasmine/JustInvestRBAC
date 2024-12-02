@@ -1,0 +1,40 @@
+{
+  "roles": [
+    "Client",
+    "Premium Client",
+    "Financial Advisor",
+    "Financial Planner",
+    "Employee",
+    "Teller"
+  ],
+  "operations": [
+    {
+      "name": "View Account Balance",
+      "roles": ["Client", "Premium Client","Employee"]
+    },
+    {
+      "name": "View Investment Portfolio",
+      "roles": ["Client", "Premium Client","Employee"]
+    },
+    {
+      "name": "Modify Investment Portfolio",
+      "roles": ["Premium Client", "Financial Advisor", "Financial Planner"]
+    },
+    {
+      "name": "View Financial Advisor Contact Info",
+      "roles": ["Client"]
+    },
+    {
+      "name": "View Financial Planner Contact Info",
+      "roles": ["Premium Client"]
+    },
+    {
+      "name": "View Money Market Instrument",
+      "roles": ["Financial Planner"]
+    },
+    {
+      "name": "View Private Consumer Instrument",
+      "roles": ["Financial Advisor", "Financial Planner"]
+    }
+  ]
+}
