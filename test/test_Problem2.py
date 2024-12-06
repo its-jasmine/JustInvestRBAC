@@ -8,20 +8,21 @@ Test the password file usage.
 
 import unittest
 from Problem2 import *
+from TEST_CONSTANTS import TEST_PASSWORD_FILE, HASH_FUNCTION, HASH_LENGTH, SALT_LENGTH, ITERATION_COUNT
 
-TEST_PASSWORD_FILE = 'passwd_test.txt'
-SALT_LENGTH = 16  # 16 bytes = 128 bits
-HASH_LENGTH = 32  # 32 bytes for SHA-256 hash
-HASH_FUNCTION = 'sha256' # the hash function that will be iteratively applied
-ITERATION_COUNT = 100000
+
 
 class TestPasswordFileManager(unittest.TestCase):
     def setUp(self):
-        """Set up the test environment by cleaning up any old password files."""
+        """Set up the test environment by cleaning up any old password files.""" # TODO make sure all tests cleanup their files properly
         if os.path.exists(TEST_PASSWORD_FILE):
             os.remove(TEST_PASSWORD_FILE)  # Ensure no leftover data
 
-        self.pswd_file_manager = PasswordFileManager(TEST_PASSWORD_FILE, HASH_FUNCTION, SALT_LENGTH, ITERATION_COUNT, HASH_LENGTH)
+        self.pswd_file_manager = PasswordFileManager(password_file=TEST_PASSWORD_FILE,
+                                                     hash_function=HASH_FUNCTION,
+                                                     hash_length=HASH_LENGTH,
+                                                     salt_length=SALT_LENGTH,
+                                                     iteration_count=ITERATION_COUNT)
 
     def tearDown(self):
         """Clean up after tests."""

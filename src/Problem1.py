@@ -5,9 +5,11 @@ Exercise: 1 (c)
 Description:
 Implement the access control mechanism to ensure the user is only allowed to perform their authorized operations.
 '''
+import datetime
 from enum import Enum
 from pathlib import Path
 import json
+
 
 
 class RoleBasedAccessControl:
@@ -21,10 +23,12 @@ class RoleBasedAccessControl:
       ]
     }
     '''
-    def __init__(self, file_path):
-        self.Role, self.Operation = RoleBasedAccessControl.load_roles_operations(file_path)
+    def __init__(self, file_path: str):
+        self.Role, self.Operation, self.timeRestrictions = RoleBasedAccessControl.load_roles_operations(file_path)
 
-    def role_authorized_to_perform(self, role: Enum, operation: Enum):
+
+
+    def role_authorized_to_perform(self, role: Enum, operation: Enum, time=datetime.datetime.now()):
         '''
         Checks if the given role is allowed to perform this operation.
         :param role: The role of the user attempting to perform operation.
@@ -35,6 +39,18 @@ class RoleBasedAccessControl:
             raise Exception("Must provide a Role enum value")
         if not (isinstance(operation, self.Operation)):
             raise Exception("Must provide an Operation enum value")
+
+        if role in self.timeRestrictions.keys():
+            current_hour = time.hour  # Get the current hour in 24-hour format
+
+            # Retrieve the start and end hours from the time restriction
+            start_hour = self.timeRestrictions[role]["start"]
+            end_hour = self.timeRestrictions[role]["end"]
+            # Check if the current time is outside the allowed range
+            if current_hour < start_hour or current_hour >= end_hour:
+                print(
+                    f"Access denied: Current time {current_hour}:{time.minute} is outside allowed hours ({start_hour}:00 - {end_hour}:00).")
+                return False
 
         return role in operation.value['authorized_roles']
 
@@ -75,7 +91,13 @@ class RoleBasedAccessControl:
             operations[name] = {'description': description, 'authorized_roles': authorized_roles}
         Operation = Enum("Operation", operations)
 
-        return (Role, Operation)
+        time_restrictions = {}
+        if ("timeRestrictions" in data):
+            for restriction in data["timeRestrictions"]:
+                role = Role(restriction["role"])
+                start = restriction["startTime"]
+                end = restriction["endTime"]
 
-if __name__ == "__main__":
-    RoleBasedAccessControl('roles_and_operations.json')
+            time_restrictions[role] = {"start": start, "end": end}
+
+        return (Role, Operation, time_restrictions)

@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "username": "johndoe",
+      "password": "SecurePass123!",
+      "role": "Client"
+    },
+    {
+      "username": "janedoe",
+      "password": "PremiumPass456!",
+      "role": "Premium Client"
+    },
+    {
+      "username": "finance_guru",
+      "password": "InvestingIsFun78!",
+      "role": "Financial Advisor"
+    },
+    {
+      "username": "planner_pro",
+      "password": "Plan4Success!",
+      "role": "Financial Planner"
+    },
+    {
+      "username": "teller1",
+      "password": "Banking123!",
+      "role": "Teller"
+    }
+  ]
+}

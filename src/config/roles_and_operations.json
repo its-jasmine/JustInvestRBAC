@@ -4,17 +4,21 @@
     "Premium Client",
     "Financial Advisor",
     "Financial Planner",
-    "Employee",
     "Teller"
+  ],
+  "timeRestrictions": [
+    {"role": "Teller",
+    "startTime":  9,
+      "endTime": 17}
   ],
   "operations": [
     {
       "name": "View Account Balance",
-      "roles": ["Client", "Premium Client","Employee"]
+      "roles": ["Client", "Premium Client","Financial Advisor", "Financial Planner","Teller"]
     },
     {
       "name": "View Investment Portfolio",
-      "roles": ["Client", "Premium Client","Employee"]
+      "roles": ["Client", "Premium Client", "Financial Advisor", "Financial Planner","Teller"]
     },
     {
       "name": "Modify Investment Portfolio",
@@ -22,7 +26,7 @@
     },
     {
       "name": "View Financial Advisor Contact Info",
-      "roles": ["Client"]
+      "roles": ["Client", "Premium Client" ]
     },
     {
       "name": "View Financial Planner Contact Info",

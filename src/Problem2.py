@@ -16,7 +16,7 @@ import base64
 from hashlib import pbkdf2_hmac
 
 class PasswordFileManager:
-    def __init__(self, password_file, hash_function: str, salt_length: int, iteration_count: int, hash_length: int):
+    def __init__(self, password_file:str, hash_function: str, salt_length:int, iteration_count:int, hash_length:int):
         '''
         Initializes the PasswordFileManager and ensures the password file exists.
         :param password_file: Path to the password file.
